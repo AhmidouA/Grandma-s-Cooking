@@ -1,12 +1,16 @@
 const express = require("express");
 const app = express();
 
+
+require("dotenv").config();
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
-require("dotenv").config();
+
+
+const router = require ('./routes/router')
 const PORT = process.env.PORT ?? 3000;
 
 mongoose.connect(process.env.MGDBURL)
@@ -20,13 +24,7 @@ app.use(express.static("public"))
 // Body Parcer
 app.use(bodyParser.urlencoded({extended: false}))
 
-// Models
-const User = require('./models/user')
-
-app.get('/', (req,res) => {
-    res.render("index")
-
-});
+app.use(router)
 
 
 app.listen(PORT, () => {
