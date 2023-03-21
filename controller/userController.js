@@ -43,31 +43,31 @@ const userController = {
   },
 
   //module login(form)
-  login(req, res) {
+  async login(req, res) {
     const user = {
       username: req.body.username,
       password: req.body.password,
     };
     console.log(chalk.bgBlue("{ user.username>>>>>>> }", user.username));
     console.log(chalk.bgBlue("{ user.password>>>>>>> }", user.password));
+  
+    try {
+      const foundUser = await User.findOne({ username: user.username });
+      console.log(chalk.bgYellow("{ foundUser.username>>>>>>> }", foundUser.username));
 
-
-    User.findOne({ username: user.username })
-      .then((foundUser) => {
-        if (foundUser) {
-          console.log("{ foundUser>>>>>>> }", foundUser.username);
-          if (foundUser.password === req.body.password) {
-            res.render("index");
-          }
+      const passwordMatch = await bcrypt.compare(user.password, foundUser.password);
+      if (passwordMatch) {
+        console.log(chalk.bgYellow("{ user.username>>>>>>> }", user.username));
+         return res.render('index');
         } else {
-          res.send(`l'utilisateur ${user.username} n'exste pas`);
-          console.log(chalk.red((`L'user n'existe pas ${user.username}`)));
+            throw new Error("Le mot de passe est incorrect.");
         }
-      })
-      .catch((err) => {
-        console.error((chalk.bgRedBright(err)));
-      });
-  },
+
+    } catch (err) {
+      console.error(chalk.bgRedBright(err))
+      res.send(`l'utilisateur ${user.username} n'exste pas`);
+    }
+  }
 };
 
 module.exports = userController;
