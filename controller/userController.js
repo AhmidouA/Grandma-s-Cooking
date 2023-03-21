@@ -2,6 +2,8 @@
 const User = require("../models/user");
 // la seul qui marche avec require  "chalk": "^4.1.2",
 const chalk = require("chalk");
+// hacher le mot de passe
+const bcrypt = require("bcrypt");
 
 const userController = {
   // module Home Page
@@ -15,11 +17,17 @@ const userController = {
   },
 
   //module sinUp (form)
-  signup(req, res) {
+  async signup(req, res) {
+
+    const hash = await bcrypt.hash(req.body.password, 10)
+
+    console.log(chalk.bgBlue("{ hash>>>>>>> }", hash));
     const user = {
       username: req.body.username,
-      password: req.body.password,
+      password: hash,
     };
+    console.log(chalk.bgBlue("{ user>>>>>>> }", user.username));
+
     User.create(user)
       .then((result) => {
         res.render("index");
