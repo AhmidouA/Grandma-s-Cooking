@@ -14,9 +14,14 @@ mongoose.connect(process.env.MGDBURL)
 
 //EJS
 app.set("view engine", "ejs")
+// Public
 app.use(express.static("public"))
 
+// Body Parcer
 app.use(bodyParser.urlencoded({extended: false}))
+
+// Models
+const User = require('./models/user')
 
 app.get('/', (req,res) => {
     res.render("index")
