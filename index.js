@@ -10,7 +10,7 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 
 
-const router = require ('./routes/router')
+const {userRouter} = require ('./routers')
 const PORT = process.env.PORT ?? 3000;
 
 mongoose.connect(process.env.MGDBURL)
@@ -24,7 +24,7 @@ app.use(express.static("public"))
 // Body Parcer
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(router)
+app.use(userRouter)
 
 
 app.listen(PORT, () => {
