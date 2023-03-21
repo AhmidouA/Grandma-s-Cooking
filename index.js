@@ -6,15 +6,17 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
-
-
-
 require("dotenv").config();
 const PORT = process.env.PORT ?? 3000;
+
+mongoose.connect(process.env.MGDBURL)
+
 
 //EJS
 app.set("view engine", "ejs")
 app.use(express.static("public"))
+
+app.use(bodyParser.urlencoded({extended: false}))
 
 app.get('/', (req,res) => {
     res.render("index")
