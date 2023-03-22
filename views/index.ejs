@@ -7,14 +7,20 @@
     <title>Grandma's Cooking</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <style>
-        .swiper-container {
+        .slick-container {
             width: 100%;
             padding-top: 50px;
             padding-bottom: 50px;
         }
 
-        .swiper-slide {
+        .slick-slide {
             background-position: center;
             background-size: cover;
             width: 300px;
@@ -145,10 +151,11 @@
 
 
     <!-- Swiper -->
-    <div class="swiper-container" style="width:50%">
+
+    <div class="slick-container" style="width:50%">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(images/cooking-dishes/1.png)"></div>
-            <div class="swiper-slide" style="background-image:url(images/cooking-dishes/2.png)"></div>
+            <div class="slick-slide" style="background-image:url(images/cooking-dishes/1.png)"></div>
+            <div class="slick-slide" style="background-image:url(images/cooking-dishes/2.png)"></div>
             <div class="swiper-slide" style="background-image:url(images/cooking-dishes/3.png)"></div>
             <div class="swiper-slide" style="background-image:url(images/cooking-dishes/4.png)"></div>
             <div class="swiper-slide" style="background-image:url(images/cooking-dishes/5.png)"></div>
@@ -173,24 +180,9 @@
 
     </footer>
 
-    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: false,
-            },
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-        });
-
-    </script>
+    <!-- <script> $('.slick-container').slick(); </script> -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -26,15 +26,30 @@ const userController = {
       username: req.body.username,
       password: hash,
     };
-    console.log(chalk.bgBlue("{ user>>>>>>> }", user.username));
+    console.log(chalk.bgBlue("{ user.username>>>>>>> }", user.username));
 
-    User.create(user)
-      .then((result) => {
-        res.render("index");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // Vérifier si le pseudo est déja dans la bdd
+    const existingUser = await User.findOne({username: user.username});
+    if (existingUser) {
+      console.log(chalk.red(`Le username est déjà utilisé: ${user.username}`));
+      res.send(`Le username est déjà utilisé: ${user.username}`)
+    }
+
+    try {
+      await User.create(user)
+      console.log(chalk.bgBlue(`l'utilisateur ${user.username} a bien été inscrit `));
+      res.render("index")
+    } catch (err) {
+      console.error(chalk.bgRedBright(err))
+      res.send(`l'utilisateur ${user.username} n'a pas pu etre inscrit`);
+
+    }
+
+    // User.create(user).then((result) => {
+    //     res.render("index");
+    //   }).catch((err) => {
+    //     console.error(err);
+    //   });
   },
 
   //module login Page
@@ -56,13 +71,11 @@ const userController = {
       console.log(chalk.bgYellow("{ foundUser.username>>>>>>> }", foundUser.username));
 
       const passwordMatch = await bcrypt.compare(user.password, foundUser.password);
-      if (passwordMatch) {
-        console.log(chalk.bgYellow("{ user.username>>>>>>> }", user.username));
-         return res.render('index');
-        } else {
-            throw new Error("Le mot de passe est incorrect.");
-        }
-
+      if (!passwordMatch) {
+        res.send("Le mot de passe ou l'utilisateur est incorrect");
+        console.log(chalk.bgYellow(`Le mot de passe ou l'utilisateur est incorrect: user:${user.username}`));      
+        } 
+        return res.render('index');
     } catch (err) {
       console.error(chalk.bgRedBright(err))
       res.send(`l'utilisateur ${user.username} n'exste pas`);
