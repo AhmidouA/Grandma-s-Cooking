@@ -28,7 +28,7 @@ const userController = {
     };
     console.log(chalk.bgBlue("{ user.username>>>>>>> }", user.username));
 
-    // Vérifier si le pseudo est déja dans la bdd
+    // Vérifier si le username existe déja dans la bdd
     const existingUser = await User.findOne({username: user.username});
     if (existingUser) {
       console.log(chalk.red(`Le username est déjà utilisé: ${user.username}`));
@@ -44,12 +44,6 @@ const userController = {
       res.send(`l'utilisateur ${user.username} n'a pas pu etre inscrit`);
 
     }
-
-    // User.create(user).then((result) => {
-    //     res.render("index");
-    //   }).catch((err) => {
-    //     console.error(err);
-    //   });
   },
 
   //module login Page
