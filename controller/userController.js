@@ -1,7 +1,5 @@
-// Models User
-const User = require("../models/user");
-// Models REst
-const Reset = require("../models/reset");
+// Models 
+const { User, Reset} = require("../models");
 
 // la seul qui marche avec require  "chalk": "^4.1.2",
 const chalk = require("chalk");
@@ -22,10 +20,12 @@ const userController = {
     res.render("index");
   },
 
+
   //module signUp Page
   indexSignupPage(req, res) {
     res.render("signup");
   },
+
 
   //module sinUp (form)
   async signup(req, res, next) {
@@ -49,10 +49,12 @@ const userController = {
     };
   },
 
+
   //module login Page
   indexLoginPage(req, res) {
     res.render("Login");
   },
+
 
   //module login(form)
   async login(req, res, next) {
@@ -84,10 +86,12 @@ const userController = {
     res.render('dashboard')
   },
 
+
   // module forgot Page 
   forgotPassword(req,res){
     res.render('forgot')
   }, 
+
 
   //module forgot page (form)
   async sendPasswordResetEmail (req, res){
@@ -149,7 +153,7 @@ const userController = {
       if (!reset) {
         throw new Error(`le Token de l'utilisateur a expiré`)
       }
-      res.render('/reset', {token: token})
+      res.render('reset', {token: token})
 
     } catch (err) {
       console.error(chalk.bgRedBright(err))
@@ -158,6 +162,13 @@ const userController = {
     }
 
   },
+
+
+  //Module reset password (form)
+  resetPassword (req, res) {
+
+  },
+
 
   // module logout
   logout (req, res) {

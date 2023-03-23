@@ -33,4 +33,7 @@ router.post("/forgot", userController.sendPasswordResetEmail);
 // GET reset page
 router.get("/reset/:token", userController.resetPasswordIndexPage)
 
+// POST reset page (form)
+router.get("/reset/:token", userController.resetPassword)
+
 module.exports =router;
