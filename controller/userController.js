@@ -29,6 +29,7 @@ const userController = {
       //save le user (passport-local-mongoose)
       await User.register(newUser, req.body.password);
       console.log(chalk.bgBlue("{ newUser>>>>>>> }", newUser));
+
       // Authentification de l'utilisateur nouvellement inscrit
       passport.authenticate("local")(req, res, function() {
         res.render("index");
@@ -45,28 +46,41 @@ const userController = {
   },
 
   //module login(form)
-  async login(req, res) {
-    const user = {
+  async login(req, res, next) {
+    const user = new User ({
       username: req.body.username,
-      password: req.body.password,
-    };
+      password: req.body.password
+    })
     console.log(chalk.bgBlue("{ user.username>>>>>>> }", user.username));
     console.log(chalk.bgBlue("{ user.password>>>>>>> }", user.password));
   
     try {
-      const foundUser = await User.findOne({ username: user.username });
-      console.log(chalk.bgYellow("{ foundUser.username>>>>>>> }", foundUser.username));
+      // je lui donne un callback vide car la methode login de passport attend un callback
+      await req.login(user, () => {}); 
+      console.log(chalk.bgYellow("{ foundUser.username>>>>>>> }", user));
 
-      const passwordMatch = await bcrypt.compare(user.password, foundUser.password);
-      if (!passwordMatch) {
-        res.send("Le mot de passe ou l'utilisateur est incorrect");
-        console.log(chalk.bgYellow(`Le mot de passe ou l'utilisateur est incorrect: user:${user.username}`));      
-        } 
-        return res.render('index');
+      // Authentification de l'utilisateur nouvellement inscrit
+      passport.authenticate("local")(req, res, function() {
+        res.redirect("/dashboard");
+      });
+
     } catch (err) {
       console.error(chalk.bgRedBright(err))
       res.send(`l'utilisateur ${user.username} n'exste pas`);
     }
+  },
+
+  // module profile
+  profile (req, res) {
+    res.render('dashboard')
+  },
+
+  // module logout
+  logout (req, res) {
+    // methode logout (passport)
+    // je lui donne aussi un callback vide car la methode logout de passport attend un callback
+    req.logout(() => {})
+    res.redirect("/login")
   }
 };
 

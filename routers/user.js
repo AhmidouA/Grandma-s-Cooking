@@ -18,5 +18,11 @@ router.get("/login", userController.indexLoginPage)
 // POST Login Page
 router.post("/login", userController.login)
 
+// GET Dashboard Page
+router.get("/dashboard", userController.profile)
+
+// GET Logout Page
+router.get("/logout", userController.logout)
+
 
 module.exports =router;
