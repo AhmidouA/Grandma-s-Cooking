@@ -15,18 +15,14 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 
 // Module auth avec passport
-const passport = require('passport');
+const passport = require("passport");
 // Module pour le lien entre moongose et passport pour les auth
-const passportLocalMongoose = require('passport-local-mongoose')
-
-
+const passportLocalMongoose = require("passport-local-mongoose");
 
 // router
-const {userRouter} = require ('./routers')
+const { userRouter } = require("./routers");
 // Models User
-const User = require('./models/user');
-
-
+const User = require("./models/user");
 
 // middleware Session
 const session = require("express-session");
@@ -38,14 +34,13 @@ app.use(
   })
 );
 
-
 // Passport
-app.use(passport.initialize())
+app.use(passport.initialize());
 // lien entre les session et le passport
-app.use(passport.session())
+app.use(passport.session());
 
 // connect BDD mongoDb
-mongoose.connect(process.env.MGDBURL)
+mongoose.connect(process.env.MGDBURL);
 
 // initaliser la strategy (Passport pour gérer nous auth et request)
 // PASSPORT LOCAL MOONGOSE
@@ -56,22 +51,18 @@ passport.serializeUser(User.serializeUser());
 // détruit a les info (cookies,...)
 passport.deserializeUser(User.deserializeUser());
 
-
-
 // PORT
 const PORT = process.env.PORT ?? 3000;
 //EJS
-app.set("view engine", "ejs")
+app.set("view engine", "ejs");
 // Public
-app.use(express.static("public"))
+app.use(express.static("public"));
 
 // Body Parcer
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }));
 
-
-app.use(userRouter)
-
+app.use(userRouter);
 
 app.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`)
-})
+  console.log(`Listening on http://localhost:${PORT}`);
+});

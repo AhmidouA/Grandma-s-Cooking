@@ -1,6 +1,5 @@
-const mail = require ('./mail');
-
+const mail = require("./mail");
 
 module.exports = {
-    mail,
-}
+  mail,
+};
