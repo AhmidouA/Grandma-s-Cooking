@@ -165,8 +165,43 @@ const userController = {
 
 
   //Module reset password (form)
-  resetPassword (req, res) {
+  async resetPassword (req, res) {
+      // le token en params de l'API
+      const token = req.params.token
+      console.log(chalk.bgBlue("{ token>>>>>>> }", token));
 
+      const password = req.body.password;
+      console.log(chalk.bgCyan("{ password>>>>>>> }", password));
+      const password2 = req.body.password2;
+      console.log(chalk.bgCyan("{ password1>>>>>>> }", password2));
+
+      // Vérifier que le nouveau mot de passe correspond à la confirmation
+      if (password !== password2) {
+        console.log(chalk.red(`Le nouveaux mots de passe ne correspondent pas`));
+        res.render('reset', {token: token})
+        }
+        
+      try {
+
+        const reset = await Reset.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: {$gt: Date.now()} // token supprieur a la date (l'heure) de maintenant (=> non expiré)
+      })
+        console.log(chalk.bgBlue("{ resetPasswordToken>>>>>>> }", reset.resetPasswordToken));
+        console.log(chalk.bgYellowBright("{ resetPasswordExpires>>>>>>> }", reset.resetPasswordExpires));
+
+        // vérification du token si il n'est pas expiré
+        if (!reset) {
+        throw new Error(`le Token de l'utilisateur a expiré`)
+        }
+        
+        res.render('dashboard')
+
+      } catch (err) {
+      console.error(chalk.bgRedBright(err))
+      console.error(chalk.bgRedBright(`le Token de l'utilisateur a expiré`));
+      res.redirect('/login')
+      }
   },
 
 
