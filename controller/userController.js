@@ -118,9 +118,8 @@ const userController = {
     console.log(chalk.bgCyan("{ Reset.resetPasswordToken>>>>>>> }", reset.resetPasswordToken));
     console.log(chalk.bgBlue("{ Reset.resetPasswordExpires>>>>>>> }", reset.resetPasswordExpires));
 
-    // mail envoyé
+    // l'envoi du mail avec les deux params l'utilisateur et le token
     await mail.sendPasswordResetEmail(user, token)
-    console.log(chalk.bgYellow("{ sendPasswordResetEmail>>>>>>> }", sendPasswordResetEmail));
     
 
     res.redirect('/login')
@@ -130,6 +129,34 @@ const userController = {
     console.error(chalk.bgRedBright(`l'utilisateur ${username} n'a pas été trouvé`));
     res.redirect('/signup')
     }
+  },
+
+  // Module reset page
+  async resetPasswordIndexPage (req, res) {
+    // le token en params de l'API
+    const token = req.params.token
+    console.log(chalk.bgBlue("{ token>>>>>>> }", token));
+
+
+    try {
+    const reset = await Reset.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: {$gt: Date.now()} // token supprieur a la date (l'heure) de maintenant (=> non expiré)
+      })
+      console.log(chalk.bgBlue("{ resetPasswordToken>>>>>>> }", reset.resetPasswordToken));
+      console.log(chalk.bgYellowBright("{ resetPasswordExpires>>>>>>> }", reset.resetPasswordExpires));
+
+      if (!reset) {
+        throw new Error(`le Token de l'utilisateur a expiré`)
+      }
+      res.render('/reset', {token: token})
+
+    } catch (err) {
+      console.error(chalk.bgRedBright(err))
+      console.error(chalk.bgRedBright(`le Token de l'utilisateur a expiré`));
+      res.redirect('/login')
+    }
+
   },
 
   // module logout
