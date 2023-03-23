@@ -75,6 +75,10 @@ const userController = {
     res.render('dashboard')
   },
 
+  forgotPasswordIndexPage (req,res){
+    res.render('forgot')
+  },
+
   // module logout
   logout (req, res) {
     // methode logout (passport)

@@ -24,5 +24,8 @@ router.get("/dashboard", userController.profile)
 // GET Logout Page
 router.get("/logout", userController.logout)
 
+//GET /profile/forgot-password - route pour avoir le formulaire mot de passe oublié
+router.get("/forgot", userController.forgotPasswordIndexPage);
+
 
 module.exports =router;
