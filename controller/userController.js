@@ -29,6 +29,7 @@ const userController = {
       //save le user (passport-local-mongoose)
       await User.register(newUser, req.body.password);
       console.log(chalk.bgBlue("{ newUser>>>>>>> }", newUser));
+      // Authentification de l'utilisateur nouvellement inscrit
       passport.authenticate("local")(req, res, function() {
         res.render("index");
       });
