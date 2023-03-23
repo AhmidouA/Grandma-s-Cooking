@@ -13,6 +13,8 @@ const passportLocalMongoose = require('passport-local-mongoose')
 
 // module rand-token
 const  randToken = require('rand-token')
+// module nodmailer
+const { mail } = require("../service");
 
 const userController = {
   // module Home Page
@@ -115,6 +117,11 @@ const userController = {
     console.log(chalk.bgBlue("{ Reset.username>>>>>>> }", reset.username));
     console.log(chalk.bgCyan("{ Reset.resetPasswordToken>>>>>>> }", reset.resetPasswordToken));
     console.log(chalk.bgBlue("{ Reset.resetPasswordExpires>>>>>>> }", reset.resetPasswordExpires));
+
+    // mail envoyé
+    await mail.sendPasswordResetEmail(user, token)
+    console.log(chalk.bgYellow("{ sendPasswordResetEmail>>>>>>> }", sendPasswordResetEmail));
+    
 
     res.redirect('/login')
 
