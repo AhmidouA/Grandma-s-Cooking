@@ -1,11 +1,18 @@
-// Models
+// Models User
 const User = require("../models/user");
+// Models REst
+const Reset = require("../models/reset");
+
 // la seul qui marche avec require  "chalk": "^4.1.2",
 const chalk = require("chalk");
+
 // Module auth avec passport
 const passport = require('passport');
 // Module pour le lien entre moongose et passport pour les auth
 const passportLocalMongoose = require('passport-local-mongoose')
+
+// module rand-token
+const  randToken = require('rand-token')
 
 const userController = {
   // module Home Page
@@ -75,8 +82,47 @@ const userController = {
     res.render('dashboard')
   },
 
-  forgotPasswordIndexPage (req,res){
+  // module forgot Page 
+  forgotPassword(req,res){
     res.render('forgot')
+  }, 
+
+  //module forgot page (form)
+  async sendPasswordResetEmail (req, res){
+    const username = req.body.username
+    console.log(chalk.bgCyan("{ username>>>>>>> }", username));
+
+  try {
+
+    const user = await User.findOne({username: username})
+    console.log(chalk.bgBlue("{ User.username>>>>>>> }", User.username));
+
+    // vérification si l'utilisateur existe
+    if (!user) {
+      throw new Error(`l'utilisateur ${username} n'a pas été trouvé`)
+    }
+
+    // génération de token
+    const token = randToken.generate(16)
+    console.log(chalk.bgCyan("{ token>>>>>>> }", token));
+    
+    const reset = await Reset.create({
+      username: username,
+      resetPasswordToken: token,
+      resetPasswordExpires: Date.now() + 600000 // 600000 milliseconds = 10min
+    })
+
+    console.log(chalk.bgBlue("{ Reset.username>>>>>>> }", reset.username));
+    console.log(chalk.bgCyan("{ Reset.resetPasswordToken>>>>>>> }", reset.resetPasswordToken));
+    console.log(chalk.bgBlue("{ Reset.resetPasswordExpires>>>>>>> }", reset.resetPasswordExpires));
+
+    res.redirect('/login')
+
+      } catch (err) {
+    console.error(chalk.bgRedBright(err))
+    console.error(chalk.bgRedBright(`l'utilisateur ${username} n'a pas été trouvé`));
+    res.redirect('/signup')
+    }
   },
 
   // module logout
