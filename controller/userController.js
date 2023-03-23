@@ -175,12 +175,6 @@ const userController = {
       const password2 = req.body.password2;
       console.log(chalk.bgCyan("{ password1>>>>>>> }", password2));
 
-      // Vérifier que le nouveau mot de passe correspond à la confirmation
-      if (password !== password2) {
-        console.log(chalk.red(`Le nouveaux mots de passe ne correspondent pas`));
-        res.render('reset', {token: token})
-        }
-        
       try {
 
         const reset = await Reset.findOne({
@@ -194,12 +188,41 @@ const userController = {
         if (!reset) {
         throw new Error(`le Token de l'utilisateur a expiré`)
         }
-        
-        res.render('dashboard')
+
+        // Vérifier que le nouveau mot de passe correspond à la confirmation
+        if (password !== password2) {
+        console.log(chalk.red(`Le nouveaux mots de passe ne correspondent pas`));
+        return res.render('reset', {token: token})
+        } 
+
+        const user = await User.findOne({username: req.user})
+        console.log(chalk.bgRed("{ user>>>>>>> }", user));
+        if (!user) {
+          throw new Error(chalk.red((`l'utilisateur n'existe pas`)))
+        }
+
+        const updatePassword = await user.setPassword(password)
+        if (!updatePassword){
+          throw new Error(chalk.red((`le mot de passe n'a pas pu etre modifié`)))
+        }
+
+        user.save()
+        // reset mon token ()
+        const updateReset = {
+          resetPasswordToken: null,
+          resetPasswordExpires: null
+        }
+
+        // methode mongo pour trouver et update (2 en 1)
+        const resetToken = Reset.findOneAndUpdate({resetPasswordToken: token}, updateReset)
+        if (!resetToken) {
+          throw new Error(chalk.red((`le token n'a pas pu etre reset`)))
+        }
+
+        res.redirect('/login')
 
       } catch (err) {
       console.error(chalk.bgRedBright(err))
-      console.error(chalk.bgRedBright(`le Token de l'utilisateur a expiré`));
       res.redirect('/login')
       }
   },
