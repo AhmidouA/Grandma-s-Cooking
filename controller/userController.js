@@ -8,11 +8,15 @@ const chalk = require("chalk");
 const passport = require("passport");
 // Module pour le lien entre moongose et passport pour les auth
 const passportLocalMongoose = require("passport-local-mongoose");
+// Module Flash message middleware for Connect.
+const flash = require("connect-flash");
+
 
 // module rand-token
 const randToken = require("rand-token");
 // module nodmailer
 const { mail } = require("../service");
+
 
 const userController = {
   // module Home Page
@@ -246,6 +250,7 @@ const userController = {
     // methode logout (passport)
     // je lui donne aussi un callback vide car la methode logout de passport attend un callback
     req.logout(() => {});
+    req.flash("success", "Vous été bien déconnecté a bientot !!!")
     res.redirect("/login");
   },
 };

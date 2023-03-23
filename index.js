@@ -11,7 +11,7 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 // Module method-override (methode)
 const methodOverride = require("method-override");
-// module Flash
+// Module Flash message middleware for Connect.
 const flash = require("connect-flash");
 
 // Module auth avec passport
@@ -60,6 +60,17 @@ app.use(express.static("public"));
 
 // Body Parcer
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Module Flash message middleware for Connect.
+app.use(flash())
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success")
+  next();
+})
+
+
 
 app.use(userRouter);
 
