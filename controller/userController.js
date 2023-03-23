@@ -68,7 +68,7 @@ const userController = {
     try {
       // je lui donne un callback vide car la methode login de passport attend un callback
       await req.login(user, () => {}); 
-      console.log(chalk.bgYellow("{ foundUser.username>>>>>>> }", user));
+      console.log(chalk.bgYellow("{ user>>>>>>> }", user));
 
       // Authentification de l'utilisateur nouvellement inscrit
       passport.authenticate("local")(req, res, function() {
@@ -195,8 +195,8 @@ const userController = {
         return res.render('reset', {token: token})
         } 
 
-        const user = await User.findOne({username: req.user})
-        console.log(chalk.bgRed("{ user>>>>>>> }", user));
+        const user = await User.findOne({username: reset.username})
+        console.log(chalk.bgRed("{ user>>>>>>> }", user.username));
         if (!user) {
           throw new Error(chalk.red((`l'utilisateur n'existe pas`)))
         }
