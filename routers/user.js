@@ -1,5 +1,6 @@
 const express = require("express");
 const { userController } = require("../controller");
+const { auth } = require("../service");
 const router = express.Router();
 
 // GET Home page
@@ -18,7 +19,7 @@ router.get("/login", userController.indexLoginPage);
 router.post("/login", userController.login);
 
 // GET Dashboard Page
-router.get("/dashboard", userController.profile);
+router.get("/dashboard", auth.isLogged, userController.profile);
 
 // GET Logout Page
 router.get("/logout", userController.logout);

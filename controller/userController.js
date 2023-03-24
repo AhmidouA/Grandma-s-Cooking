@@ -251,6 +251,7 @@ const userController = {
     // je lui donne aussi un callback vide car la methode logout de passport attend un callback
     req.logout(() => {});
     req.flash("success", "Vous été bien déconnecté a bientot !!!")
+    
     res.redirect("/login");
   },
 };

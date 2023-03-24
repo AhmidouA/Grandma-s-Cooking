@@ -71,7 +71,6 @@ app.use((req, res, next) => {
 })
 
 
-
 app.use(userRouter);
 
 app.listen(PORT, () => {
