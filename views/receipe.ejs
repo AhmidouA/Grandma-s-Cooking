@@ -7,22 +7,22 @@
 
     <div class="receipe" style="margin-top:50px;">
         <div>
-
+            <% receipe.forReach((receipe) {%>    
             <div class="item">
-                <img class="rounded" src="" style="margin-top:15px;border-radius:30%" width="30%">
+                <img class="rounded" src="<%= receipe.image %>" style="margin-top:15px;border-radius:30%" width="30%">
                 <div class="content">
                     <div class="header">
-                        <h3></h3>
+                        <h3><%= receipe.name %></h3>
                     </div>
                 </div>
                 <div class="details">
-                    <a href="/dashboard/myreceipes/"><button type="button" class="btn btn-success" style="margin-bottom:10px;">View Details</button></a>
-                    <form action="/dashboard/myreceipes/?_method=DELETE" method="POST">
+                    <a href="/dashboard/myreceipes/<%= receipe._id %>"><button type="button" class="btn btn-success" style="margin-bottom:10px;">View Details</button></a>
+                    <form action="/dashboard/myreceipes/<%= receipe._id %>?_method=DELETE" method="POST">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </div>
             </div>
-
+            <% })%>
         </div>
     </div>
 </div>
