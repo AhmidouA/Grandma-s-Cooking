@@ -8,5 +8,9 @@ const router = express.Router();
 router.get('/dashboard/myreceipes', auth.isLogged, receipeController.myReceipes)
 
 
+// GET new Receipe Page
+router.get('/dashboard/newreceipe', auth.isLogged, receipeController.newReceipe)
+
+
 
 module.exports=router;
