@@ -6,12 +6,12 @@ const chalk = require("chalk");
 
 const receipeController = {
   //module mes recettes
-  async myReceipes(req, res) {
+   async myReceipes(req, res) {
     const userId = req.user.id;
     console.log(chalk.bgBlue("{ userId }>>>>>>", userId));
 
     try {
-      const receipe = await Receipe.findOne({ user: userId });
+      const receipe = await Receipe.find({ user: userId });
     //   console.log(chalk.bgCyan("{ receipe }>>>>>>", receipe + JSON.stringify()));
 
 
