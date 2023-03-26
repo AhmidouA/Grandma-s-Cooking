@@ -13,4 +13,8 @@ router.get('/dashboard/newreceipe', auth.isLogged, receipeController.newReceipe)
 
 
 
+router.post('/dashboard/newreceipe', auth.isLogged, receipeController.makeReceipe)
+
+
+
 module.exports=router;

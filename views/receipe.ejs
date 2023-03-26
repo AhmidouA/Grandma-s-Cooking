@@ -8,7 +8,7 @@
     <div class="receipe" style="margin-top:50px;">
         <div>
             <% if (receipe) { %>
-            <% receipe.forEach(function (GetReceipe) {%>    
+            <% (for receipe of GetReceipe) {%>    
             <div class="item">
                 <img class="rounded" src="<%= GetReceipe.image %>" style="margin-top:15px;border-radius:30%" width="30%">
                 <div class="content">
