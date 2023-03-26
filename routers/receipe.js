@@ -12,8 +12,11 @@ router.get('/dashboard/myreceipes', auth.isLogged, receipeController.myReceipes)
 router.get('/dashboard/newreceipe', auth.isLogged, receipeController.newReceipe)
 
 
-
+// POST Add new Receipe
 router.post('/dashboard/newreceipe', auth.isLogged, receipeController.makeReceipe)
+
+// GET
+router.get("/dashboard/myreceipes/:id", auth.isLogged, receipeController.receipeById)
 
 
 
