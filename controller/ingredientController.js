@@ -54,6 +54,12 @@ const ingredientController = {
         console.error(chalk.bgRedBright(err));
         console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre insérée `));
         }
+    },
+
+    
+    //module delete ingredient
+    deleteIngredient (req, res){
+        
     }
 };
 

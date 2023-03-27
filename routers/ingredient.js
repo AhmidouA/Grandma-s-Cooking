@@ -10,6 +10,9 @@ router.get("/dashboard/myreceipes/:id/newingredient", auth.isLogged, ingredientC
 // POST New ingredient form
 router.post("/dashboard/myreceipes/:id", auth.isLogged, ingredientController.makeIngredient)
 
+// DELETE ingredient form
+router.delete("/dashboard/myreceipes/:id", auth.isLogged, ingredientController.deleteIngredient)
+
 
 
 
