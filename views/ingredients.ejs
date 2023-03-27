@@ -80,7 +80,7 @@
                 </div>
             </h2>
             <h3 style="font-family:itallic">Receipe Info</h3>
-            <a href="/dashboard/myreceipes/<%= receipe.id %>"><button type="button" class="btn btn-success">Add New Ingredients</button></a>
+            <a href="/dashboard/myreceipes/<%= receipe.id %>/newingredient"><button type="button" class="btn btn-success">Add New Ingredients</button></a>
             <div class="team" style="margin-top:30px;margin-right:40px">
                 <table class="ui single line table">
                     <thead>
@@ -93,13 +93,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% ingredient.forEach(ingredientElement => { %> 
-                            
-                       
+                        <% if (ingredient)  { %>
+                        <% for (const ingredient of ingredientElement) { %> 
                         <tr>
                             <td><%= ingredientElement.name %></td>
-                            <td><%= ingredientElement.bestDish %></td>
-                            <td><%= ingredientElement.quantity %></td>
+                            <td><%= receipe.bestDish %></td>
+                            <td><%= receipe.quantity %></td>
                             <td>
                                 <form action="/dashboard/myreceipes//?_method=DELETE" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
@@ -112,10 +111,12 @@
                                 </form>
                             </td>
                         </tr>
-                        <% }); %>
+                        <% } %>
+                        <% };  %>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-   <%- include('partials/footer'); -%>
+
+    <%- include('./partials/footer.ejs'); -%>

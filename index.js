@@ -20,7 +20,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 // router
-const { userRouter, receipeRouter } = require("./routers");
+const { userRouter, receipeRouter, ingredientRouter } = require("./routers");
 // Models User
 const User = require("./models/user");
 
@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 })
 
 
-app.use(userRouter, receipeRouter);
+app.use(userRouter, receipeRouter, ingredientRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
