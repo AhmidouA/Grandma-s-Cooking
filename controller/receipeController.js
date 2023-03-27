@@ -63,7 +63,7 @@ const receipeController = {
         const receipe = await Receipe.findOne({user: userId, _id: receipeUserId})
         console.log(chalk.green("{ receipe }>>>>>>", receipe));
 
-        const ingredient = await Ingredient.findOne({user: userId, receipe: receipeUserId})
+        const ingredient = await Ingredient.find({user: userId, receipe: receipeUserId})
         console.log(chalk.magenta("{ ingredient }>>>>>>", JSON.stringify(ingredient)));
         res.render('ingredients', {ingredient: ingredient, receipe: receipe})
         

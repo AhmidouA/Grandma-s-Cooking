@@ -93,12 +93,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% if (ingredient)  { %>
-                        <% for (const ingredient of ingredientElement) { %> 
+                        <% for (const element of ingredient) { %> 
                         <tr>
-                            <td><%= ingredientElement.name %></td>
-                            <td><%= receipe.bestDish %></td>
-                            <td><%= receipe.quantity %></td>
+                            <td><%= element.name %></td>
+                            <td><%= element.bestDish %></td>
+                            <td><%= element.quantity %></td>
                             <td>
                                 <form action="/dashboard/myreceipes//?_method=DELETE" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
@@ -112,7 +111,6 @@
                             </td>
                         </tr>
                         <% } %>
-                        <% };  %>
                     </tbody>
                 </table>
             </div>

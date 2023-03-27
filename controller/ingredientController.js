@@ -7,6 +7,7 @@ const chalk = require("chalk");
 
 const ingredientController = {
 
+    //module ingredient page
     async ingredientPage (req, res) {
         const receipeId = req.params.id
         console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
@@ -23,8 +24,36 @@ const ingredientController = {
         }      
     },
 
-    lola(req, res){
-        res.send("Hello")
+    //module ingredient page (form)
+    async makeIngredient(req, res){
+        const name = req.body.name
+        console.log(chalk.blue("{ name }>>>>>>", name));
+        const bestDish = req.body.bestDish
+        console.log(chalk.cyan("{ bestDish }>>>>>>", bestDish));
+        const quantity = req.body.quantity
+        console.log(chalk.blueBright("{ quantity }>>>>>>", quantity));
+        const userId = req.user.id
+        console.log(chalk.cyanBright("{ userId }>>>>>>", userId));
+        const receipeId = req.params.id
+        console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
+
+        try {
+            const ingredient = await Ingredient.create({
+                name: name, 
+                bestDish: bestDish, 
+                user: userId, 
+                quantity: quantity, 
+                receipe: receipeId
+            })
+            console.log(chalk.green("{ ingredient }>>>>>>", ingredient));
+
+            req.flash("success", "Votre ingrédient à bien été ajouté")
+            res.redirect("/dashboard/myreceipes/" + receipeId)
+
+        } catch (err) {
+        console.error(chalk.bgRedBright(err));
+        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre insérée `));
+        }
     }
 };
 
