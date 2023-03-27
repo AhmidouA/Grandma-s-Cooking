@@ -58,8 +58,23 @@ const ingredientController = {
 
     
     //module delete ingredient
-    deleteIngredient (req, res){
-        
+    async deleteIngredient (req, res){
+        const receipeId = req.params.id
+        console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
+        const ingredientId = req.params.ingredientId;
+        console.log(chalk.cyan("{ ingredientId }>>>>>>", ingredientId));
+
+        try {
+            const deleteIngredient = await Ingredient.deleteOne({_id: ingredientId });
+            console.log(chalk.green("{ deleteIngredient }>>>>>>", JSON.stringify(deleteIngredient)));
+
+            req.flash("success", "L'ingrédient a bien été supprimé")
+            res.redirect("/dashboard/myreceipes/" + receipeId);
+
+        } catch (err) {
+        console.error(chalk.bgRedBright(err));
+        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre supprimé `));
+        }
     }
 };
 
