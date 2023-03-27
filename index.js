@@ -9,10 +9,6 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 // Module moongose
 const mongoose = require("mongoose");
-// Module method-override (methode)
-const methodOverride = require("method-override");
-// Module Flash message middleware for Connect.
-const flash = require("connect-flash");
 
 // Module auth avec passport
 const passport = require("passport");
@@ -61,6 +57,9 @@ app.use(express.static("public"));
 // Body Parcer
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// Module Flash message middleware for Connect.
+const flash = require("connect-flash");
 // Module Flash message middleware for Connect.
 app.use(flash())
 app.use((req, res, next) => {
@@ -70,6 +69,11 @@ app.use((req, res, next) => {
   next();
 })
 
+
+// Module method-override (methode)
+const methodOverride = require("method-override");
+// override with POST having ?_method=DELETE => pour les methode
+app.use(methodOverride('_method'))
 
 app.use(userRouter, receipeRouter, ingredientRouter);
 
