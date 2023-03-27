@@ -5,7 +5,7 @@ const router = express.Router ()
 
 
 // GET New ingredient Page
-router.get("dashboard/myreceipes/:id/newingredient", auth.isLogged, ingredientController.ingredientPage)
+router.get("/dashboard/myreceipes/:id/newingredient", auth.isLogged, ingredientController.ingredientPage)
 
 
 

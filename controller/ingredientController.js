@@ -8,7 +8,7 @@ const chalk = require("chalk");
 const ingredientController = {
 
     async ingredientPage (req, res) {
-        const receipeId = req.parmas.id
+        const receipeId = req.params.id
         console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
 
         try {
@@ -21,6 +21,10 @@ const ingredientController = {
         console.error(chalk.bgRedBright(`la recette avec l'id ${receipeId} n'a pas été trouvé`));
         
         }      
+    },
+
+    lola(req, res){
+        res.send("Hello")
     }
 };
 
