@@ -77,8 +77,8 @@ const ingredientController = {
         }
     },
 
-    // module update ingredient
-    async updateIngredient (req, res) {
+    // module update ingredient (form)
+    async updatePageIngredient (req, res) {
         const userId = req.user.id
         console.log(chalk.blue("{ userId }>>>>>>", userId));
         const ingredientId = req.params.ingredientId;
@@ -94,13 +94,18 @@ const ingredientController = {
             console.log(chalk.Bg("{ ingredientUser }>>>>>>", ingredientUser));
 
             res.render("edit", {ingredient: ingredientUser, receipe: receipeUser })
-            
+
         } catch (err) {
         console.error(chalk.bgRedBright(err));
         console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre modifié `));
         }
 
     },
+
+    //module update ingredient
+    updateIngredient (req, res) {
+        
+    }
 };
 
 module.exports = ingredientController

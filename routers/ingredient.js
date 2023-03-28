@@ -13,8 +13,11 @@ router.post("/dashboard/myreceipes/:id", auth.isLogged, ingredientController.mak
 // DELETE ingredient form
 router.delete("/dashboard/myreceipes/:id/:ingredientId", auth.isLogged, ingredientController.deleteIngredient)
 
-// DELETE ingredient form
-router.post("/dashboard/myreceipes/:id/:ingredientId/edit", auth.isLogged, ingredientController.updateIngredient)
+// POST ingredient form
+router.post("/dashboard/myreceipes/:id/:ingredientId/edit", auth.isLogged, ingredientController.updatePageIngredient)
+
+// PUT ingredient form
+router.put("/dashboard/myreceipes/:id/:ingredientId", auth.isLogged, ingredientController.updateIngredient)
 
 
 
