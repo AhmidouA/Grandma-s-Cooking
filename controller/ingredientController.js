@@ -75,6 +75,11 @@ const ingredientController = {
         console.error(chalk.bgRedBright(err));
         console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre supprimé `));
         }
+    },
+
+    // module update ingredient
+    updateIngredient (req, res) {
+        
     }
 };
 

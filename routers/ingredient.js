@@ -13,6 +13,9 @@ router.post("/dashboard/myreceipes/:id", auth.isLogged, ingredientController.mak
 // DELETE ingredient form
 router.delete("/dashboard/myreceipes/:id/:ingredientId", auth.isLogged, ingredientController.deleteIngredient)
 
+// DELETE ingredient form
+router.post("/dashboard/myreceipes/:id/:ingredientId/edit", auth.isLogged, ingredientController.updateIngredient)
+
 
 
 
