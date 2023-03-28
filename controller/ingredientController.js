@@ -78,9 +78,29 @@ const ingredientController = {
     },
 
     // module update ingredient
-    updateIngredient (req, res) {
-        
-    }
+    async updateIngredient (req, res) {
+        const userId = req.user.id
+        console.log(chalk.blue("{ userId }>>>>>>", userId));
+        const ingredientId = req.params.ingredientId;
+        console.log(chalk.cyan("{ ingredientId }>>>>>>", ingredientId));
+        const receipeId = req.params.id
+        console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
+
+        try {
+            const receipeUser = await Receipe.findOne({user :userId, _id :receipeId})
+            console.log(chalk.bgGreen("{ receipeUser }>>>>>>", receipeUser));
+
+            const ingredientUser = await Ingredient.findOne({_id :ingredientId, receipe :receipeId})
+            console.log(chalk.Bg("{ ingredientUser }>>>>>>", ingredientUser));
+
+            res.render("edit", {ingredient: ingredientUser, receipe: receipeUser })
+            
+        } catch (err) {
+        console.error(chalk.bgRedBright(err));
+        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre modifié `));
+        }
+
+    },
 };
 
 module.exports = ingredientController
