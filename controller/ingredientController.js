@@ -92,7 +92,7 @@ const ingredientController = {
             console.log(chalk.bgGreen("{ receipeUser }>>>>>>", receipeUser));
 
             const ingredientUser = await Ingredient.findOne({_id :ingredientId, receipe :receipeId})
-            console.log(chalk.Bg("{ ingredientUser }>>>>>>", ingredientUser));
+            console.log(chalk.green("{ ingredientUser }>>>>>>", ingredientUser));
 
             res.render("edit", {ingredient: ingredientUser, receipe: receipeUser })
 
@@ -115,16 +115,18 @@ const ingredientController = {
         console.log(chalk.cyanBright("{ userId }>>>>>>", userId));
         const receipeId = req.params.id
         console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
+        const ingredientId = req.params.ingredientId;
+        console.log(chalk.cyan("{ ingredientId }>>>>>>", ingredientId));
 
         try {
-            const updateIngredient = await updateOne({
+            const updateIngredient = await Ingredient.findByIdAndUpdate({ _id: ingredientId}, {
                 name: name, 
                 bestDish: bestDish, 
                 user: userId, 
                 quantity: quantity, 
                 receipe: receipeId 
             })
-            console.log(chalk.bgGreen("{ updateIngredient }>>>>>>", JSON.stringify(updateIngredient)));
+            console.log(chalk.bgGreen("{ updateIngredient }>>>>>>", updateIngredient));
 
             req.flash("success", "L'ingrédient a bien été modifié")
             res.redirect("/dashboard/myreceipes/" + receipeId);
