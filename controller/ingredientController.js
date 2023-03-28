@@ -4,6 +4,7 @@ const { Ingredient } = require("../models");
 
 // la seul qui marche avec require  "chalk": "^4.1.2",
 const chalk = require("chalk");
+const { updateOne } = require("../models/user");
 
 const ingredientController = {
 
@@ -97,14 +98,42 @@ const ingredientController = {
 
         } catch (err) {
         console.error(chalk.bgRedBright(err));
-        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre modifié `));
+        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre trouvé `));
         }
 
     },
 
     //module update ingredient
-    updateIngredient (req, res) {
-        
+    async updateIngredient (req, res) {
+        const name = req.body.name
+        console.log(chalk.blue("{ name }>>>>>>", name));
+        const bestDish = req.body.bestDish
+        console.log(chalk.cyan("{ bestDish }>>>>>>", bestDish));
+        const quantity = req.body.quantity
+        console.log(chalk.blueBright("{ quantity }>>>>>>", quantity));
+        const userId = req.user.id
+        console.log(chalk.cyanBright("{ userId }>>>>>>", userId));
+        const receipeId = req.params.id
+        console.log(chalk.blue("{ receipeId }>>>>>>", receipeId));
+
+        try {
+            const updateIngredient = await updateOne({
+                name: name, 
+                bestDish: bestDish, 
+                user: userId, 
+                quantity: quantity, 
+                receipe: receipeId 
+            })
+            console.log(chalk.bgGreen("{ updateIngredient }>>>>>>", JSON.stringify(updateIngredient)));
+
+            req.flash("success", "L'ingrédient a bien été modifié")
+            res.redirect("/dashboard/myreceipes/" + receipeId);
+            
+
+        } catch (err) {
+        console.error(chalk.bgRedBright(err));
+        console.error(chalk.bgRedBright(`les ingrédients n'ont pas pu étre modifié `));
+        }
     }
 };
 
