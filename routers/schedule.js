@@ -3,8 +3,11 @@ const { scheduleController } = require('../controller')
 const {auth} = require('../service')
 const router = express.Router()
 
-// GET Favorite Page 
+// GET schedule Page 
 router.get('/dashboard/schedule', auth.isLogged, scheduleController.schedulePage)
+
+// GET ADD schedule
+router.get('/dashboard/schedule/newschedule', auth.isLogged, scheduleController.AddSchedulePage)
 
 
 

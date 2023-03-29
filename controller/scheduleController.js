@@ -18,6 +18,11 @@ const scheduleController = {
             console.error(chalk.bgRedBright(`le planing n'a as pu etre trouvé`));
         }
         
+    }, 
+
+    //module Schedule Page
+    AddSchedulePage (req, res){
+        res.render('newSchedule')
     }
 }
 
