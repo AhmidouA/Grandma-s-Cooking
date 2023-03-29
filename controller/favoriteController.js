@@ -24,7 +24,7 @@ const favoriteController = {
     
     //module Add favorite
     AddFavoritePage (req, res) {
-        res.render('newFavorites')
+        res.render('newfavorite')
     }
 
 };
