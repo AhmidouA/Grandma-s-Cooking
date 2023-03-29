@@ -4,14 +4,14 @@ const chalk = require("chalk");
 const flash = require("connect-flash");
 
 const auth = {
-    isLogged (req, res, next) {
-        // methode passport
-        if (!req.isAuthenticated()) {
-            req.flash("error", "Vous devez vous connecter d'abord")
-            res.redirect("/login")        
-        }
-        next();
+  isLogged(req, res, next) {
+    // methode passport
+    if (!req.isAuthenticated()) {
+      req.flash("error", "Vous devez vous connecter d'abord");
+      res.redirect("/login");
     }
+    next();
+  },
 };
 
 module.exports = auth;
