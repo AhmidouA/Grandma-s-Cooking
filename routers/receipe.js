@@ -18,4 +18,7 @@ router.post('/dashboard/newreceipe', auth.isLogged, receipeController.makeReceip
 // GET receipe by Id
 router.get("/dashboard/myreceipes/:id", auth.isLogged, receipeController.receipeById)
 
+// DELETE receipe by id 
+router.delete("/dashboard/myreceipes/:id",  auth.isLogged, receipeController.deleteReceipe)
+
 module.exports=router;

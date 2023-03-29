@@ -71,7 +71,13 @@ const receipeController = {
         console.error(chalk.bgRedBright(err));
         console.error(chalk.bgRedBright(`Utilisateur non identifié `));
       }
-  } 
+  },
+
+
+  //module delete par id
+  deleteReceipe (req, res) {
+    
+  }
 };
 
 module.exports = receipeController;
