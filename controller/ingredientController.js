@@ -4,7 +4,7 @@ const { Ingredient } = require("../models");
 
 // la seul qui marche avec require  "chalk": "^4.1.2",
 const chalk = require("chalk");
-const { updateOne } = require("../models/user");
+
 
 const ingredientController = {
 
