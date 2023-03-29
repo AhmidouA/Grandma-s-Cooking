@@ -22,6 +22,7 @@ const ingredientController = {
           `la recette avec l'id ${receipeId} n'a pas été trouvé`
         )
       );
+      res.render("500");
     }
   },
 
@@ -55,6 +56,7 @@ const ingredientController = {
       console.error(
         chalk.bgRedBright(`les ingrédients n'ont pas pu étre insérée `)
       );
+      res.render("500");
     }
   },
 
@@ -83,6 +85,7 @@ const ingredientController = {
       console.error(
         chalk.bgRedBright(`les ingrédients n'ont pas pu étre supprimé `)
       );
+      res.render("500");
     }
   },
 
@@ -114,6 +117,7 @@ const ingredientController = {
       console.error(
         chalk.bgRedBright(`les ingrédients n'ont pas pu étre trouvé `)
       );
+      res.render("500");
     }
   },
 
@@ -154,6 +158,7 @@ const ingredientController = {
       console.error(
         chalk.bgRedBright(`les ingrédients n'ont pas pu étre modifié `)
       );
+      res.render("500");
     }
   },
 };

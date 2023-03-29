@@ -12,6 +12,18 @@ const auth = {
     }
     next();
   },
+
+   // middleware d'erreur 404
+   notFound(req, res, next) {
+    // Instance de error
+    const error = new Error(`La page demandée est ${req.url}`);
+    error.status = 500;
+
+    res.render('500');
+
+    next(console.error(error));
+  },
+
 };
 
 module.exports = auth;

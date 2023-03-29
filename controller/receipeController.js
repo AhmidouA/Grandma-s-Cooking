@@ -23,6 +23,7 @@ const receipeController = {
           `le Token de l'utilisateur avec l'id, n'a pas été trouvé`
         )
       );
+      res.render("500");
     }
   },
 
@@ -53,6 +54,7 @@ const receipeController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`la nouvelle n'a pas pu etre ajoutée `));
+      res.render("500");
     }
   },
 
@@ -81,6 +83,7 @@ const receipeController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`Utilisateur non identifié `));
+      res.render("500");
     }
   },
 
@@ -100,6 +103,7 @@ const receipeController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`la recette n'a pas pu etre supprimée `));
+      res.render("500");
     }
   },
 };

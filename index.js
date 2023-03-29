@@ -19,6 +19,9 @@ const passport = require("passport");
 // Module pour le lien entre moongose et passport pour les auth
 const passportLocalMongoose = require("passport-local-mongoose");
 
+// midlleware error
+const {auth} = require("./service");
+
 // router
 const { userRouter, receipeRouter, ingredientRouter, favoriteRouter, scheduleRouter } = require("./routers");
 // Models User
@@ -53,10 +56,10 @@ passport.deserializeUser(User.deserializeUser());
 
 // PORT
 const PORT = process.env.PORT ?? 3000;
-//EJS
-app.set("view engine", "ejs");
 // Public
 app.use(express.static("public"));
+//EJS
+app.set("view engine", "ejs");
 
 // Body Parcer
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -106,6 +109,9 @@ const options = {
 };
 
 expressJSDocSwagger(app)(options);
+
+// middleware 404
+app.use(auth.notFound);
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);

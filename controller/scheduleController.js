@@ -15,6 +15,7 @@ const scheduleController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`le planing n'a as pu etre trouvé`));
+      res.render("500");
     }
   },
 
@@ -48,6 +49,7 @@ const scheduleController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`le planing n'a as pu etre ajouté`));
+      res.render("500");
     }
   },
 
@@ -65,6 +67,7 @@ const scheduleController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`le planing n'a as pu etre supprimé`));
+      res.render("500");
     }
   },
 };

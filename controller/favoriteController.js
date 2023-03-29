@@ -18,6 +18,7 @@ const favoriteController = {
       console.error(
         chalk.bgRedBright(`les favoris n'ont pas pu etre récupéré`)
       );
+      res.render("500");
     }
   },
 
@@ -51,6 +52,7 @@ const favoriteController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`le favori n'a pas pu etre récupéré`));
+      res.render("500");
     }
   },
 
@@ -70,6 +72,7 @@ const favoriteController = {
     } catch (err) {
       console.error(chalk.bgRedBright(err));
       console.error(chalk.bgRedBright(`le favori a bien été supprimé`));
+      res.render("500");
     }
   },
 };

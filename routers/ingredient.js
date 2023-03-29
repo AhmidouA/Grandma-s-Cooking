@@ -91,6 +91,4 @@ router.post("/dashboard/myreceipes/:id/:ingredientId/edit", auth.isLogged, ingre
 router.put("/dashboard/myreceipes/:id/:ingredientId", auth.isLogged, ingredientController.updateIngredient)
 
 
-
-
 module.exports = router
