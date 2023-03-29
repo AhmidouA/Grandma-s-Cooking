@@ -51,7 +51,7 @@ router.post('/dashboard/newreceipe', auth.isLogged, receipeController.makeReceip
 
 
 /**
-GET /dashboard/myreceipes/:id
+GET /dashboard/myreceipes/{id}
 @summary Affiche les ingrédients d'une recette spécifique
 @security bearerAuth
 @tags Recettes
@@ -64,7 +64,7 @@ router.get("/dashboard/myreceipes/:id", auth.isLogged, receipeController.receipe
 
 
 /**
-DELETE /dashboard/myreceipes/:id
+DELETE /dashboard/myreceipes/{id}
 @summary Supprime une recette
 @security bearerAuth
 @tags Recettes

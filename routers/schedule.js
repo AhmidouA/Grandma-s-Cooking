@@ -53,7 +53,7 @@ router.post('/dashboard/schedule', auth.isLogged, scheduleController.makeSchedul
 
 
 /**
- * DELETE /dashboard/schedule/:id
+ * DELETE /dashboard/schedule/{id}
  * @summary Supprime un planning spécifique de l'utilisateur connecté
  * @security bearerAuth
  * @tags Planning

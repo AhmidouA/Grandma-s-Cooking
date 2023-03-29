@@ -17,7 +17,7 @@ const router = express.Router ()
 
 
 /**
-GET /dashboard/myreceipes/:id/newingredient
+GET /dashboard/myreceipes/{id}/newingredient
 @summary Affiche la page pour ajouter un nouvel ingrédient à une recette
 @security bearerAuth
 @tags Recettes
@@ -30,7 +30,7 @@ router.get("/dashboard/myreceipes/:id/newingredient", auth.isLogged, ingredientC
 
 
 /**
- * POST /dashboard/myreceipes/:id
+ * POST /dashboard/myreceipes/{id}
  * @summary Ajoute un nouvel ingrédient à une recette
  * @security bearerAuth
  * @tags Ingrédients
@@ -59,7 +59,7 @@ router.delete("/dashboard/myreceipes/:id/:ingredientId", auth.isLogged, ingredie
 
 
 /**
-POST /dashboard/myreceipes/:id/:ingredientId/edit
+POST /dashboard/myreceipes/{id}/{ingredientId}/edit
 @summary Affiche la page d'édition d'un ingrédient d'une recette
 @security bearerAuth
 @tags Ingrédients
@@ -73,7 +73,7 @@ router.post("/dashboard/myreceipes/:id/:ingredientId/edit", auth.isLogged, ingre
 
 
 /**
- * PUT /dashboard/myreceipes/:id/:ingredientId
+ * PUT /dashboard/myreceipes/{id}/{ingredientId}
  * @summary Met à jour un ingrédient d'une recette
  * @security bearerAuth
  * @tags Ingrédients
