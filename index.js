@@ -110,7 +110,7 @@ const options = {
 
 expressJSDocSwagger(app)(options);
 
-// middleware 404
+// middleware 500
 app.use(auth.notFound);
 
 app.listen(PORT, () => {
