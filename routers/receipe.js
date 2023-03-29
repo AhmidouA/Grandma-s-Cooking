@@ -36,13 +36,12 @@ router.get('/dashboard/newreceipe', auth.isLogged, receipeController.newReceipe)
 
 
 /**
-
 POST /dashboard/newreceipe
 @summary Crée une nouvelle recette
 @security bearerAuth
 @tags Recettes
-@param {string} request.body..receipe - Nom de la nouvelle recette
-@param {string} request.body..logo - URL de l'image de la nouvelle recette
+@param {string} request.body.receipe - Nom de la nouvelle recette
+@param {string} request.body.logo - URL de l'image de la nouvelle recette
 @return {html} 302 - Redirige vers la liste des recettes de l'utilisateur
 @throws {html} 500 - Erreur serveur
 */
@@ -74,5 +73,7 @@ DELETE /dashboard/myreceipes/{id}
 */
 // DELETE receipe by id 
 router.delete("/dashboard/myreceipes/:id",  auth.isLogged, receipeController.deleteReceipe)
+
+
 
 module.exports=router;
