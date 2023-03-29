@@ -82,11 +82,11 @@ const receipeController = {
     console.log(chalk.cyan("{ receipeId }>>>>>>", receipeId));
 
     try {
-      const deleteReceipe = await Receipe.deleteOne({_id: receipeId, user: userId})
+      const deleteReceipe = await Receipe.deleteOne({_id: receipeId})
       console.log(chalk.green("{ deleteReceipe }>>>>>>", deleteReceipe));
 
       req.flash("success", "La recette a bien été supprimée")
-      res.redirect("/dashboard/myreceipes/" + receipeId);
+      res.redirect("/dashboard/myreceipes");
 
 
     } catch (err) {
