@@ -12,6 +12,9 @@ router.get('/dashboard/favorites/newfavorite', auth.isLogged, favoriteController
 // POST ADD Favorite
 router.post('/dashboard/favorites', auth.isLogged, favoriteController.makeFavorite)
 
+// DELETE Favorite
+router.delete('/dashboard/favorites/:id', auth.isLogged, favoriteController.deleteFavorite)
+
 
 
 module.exports = router

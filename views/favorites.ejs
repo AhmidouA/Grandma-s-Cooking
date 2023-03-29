@@ -14,7 +14,7 @@
                         <h5 class="card-title">"<%= elementFavorite.title %>" </h5>
                         <p class="card-text">"<%= elementFavorite.description %>" </p>
                         <a href="#" class="btn btn-primary">"<%= elementFavorite.date %>" </a>
-                        <form action="/dashboard/favorites/?_method=DELETE" method="POST">
+                        <form action="/dashboard/favorites/<%= elementFavorite._id %>?_method=DELETE" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger" style="margin-top:15px;">Delete</button>
                         </form>

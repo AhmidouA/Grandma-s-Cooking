@@ -48,12 +48,31 @@ const favoriteController = {
 
         } catch (err) {
             console.error(chalk.bgRedBright(err));
-            console.error(chalk.bgRedBright(`le favori na pas pu etre récupéré`));
+            console.error(chalk.bgRedBright(`le favori n'a pas pu etre récupéré`));
         }
+    },
 
+
+    //module delete fav
+    async deleteFavorite (req, res) {
+        const userId = req.user.id
+        console.log(chalk.blue("{ userId }>>>>>>", userId));
+        const favoriteId = req.params.id
+        console.log(chalk.cyan("{ favoriteId }>>>>>>", favoriteId));
+
+        try {
+            const deleteFavorite = await Favorite.deleteOne({_id: favoriteId})
+            console.log(chalk.bgGreen("{ deleteFavorite }>>>>>>", deleteFavorite))
+
+            req.flash("success", "Le favoris a bien été supprimé")
+            res.redirect("/dashboard/favorites");
+
+
+        } catch (err) {
+            console.error(chalk.bgRedBright(err));
+            console.error(chalk.bgRedBright(`le favori a bien été supprimé`));
+        }
     }
-
 };
-
 
 module.exports = favoriteController
