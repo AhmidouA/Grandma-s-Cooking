@@ -4,6 +4,17 @@ const { auth } = require("../service");
 const router = express.Router () 
 
 
+/**
+ *  Ingredient 
+ * @typedef {object} Ingredient
+ * @property {string} name - Nom de l'Ingredient
+ * @property {string} bestDish - Titre de l'Ingredient
+ * @property {string} quantity - description de l'Ingredient
+ * @property {string} user - Utilisateur de l'Ingredient
+ * @property {string} receipe - recette de l'Ingredient
+ * @property {Date} date - date de l'ajout l'Ingredient
+ */
+
 // GET New ingredient Page
 router.get("/dashboard/myreceipes/:id/newingredient", auth.isLogged, ingredientController.ingredientPage)
 
