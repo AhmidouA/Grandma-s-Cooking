@@ -50,6 +50,25 @@ const scheduleController = {
             console.error(chalk.bgRedBright(err));
             console.error(chalk.bgRedBright(`le planing n'a as pu etre ajouté`));       
         }
+    }, 
+
+
+    //module delete schedule
+    async deleteSchedule (req, res) {
+        const userId = req.user.id
+        console.log(chalk.cyan("{ userId }>>>>>>", userId));
+
+        try {
+            const schedule = await Schedule.deleteOne({user: userId})
+            console.log(chalk.blue("{ schedule }>>>>>>", schedule));
+
+            req.flash("success", "Votre planing à bien été supprimé")
+            res.redirect("/dashboard/schedule")
+
+        } catch (err) {
+            console.error(chalk.bgRedBright(err));
+            console.error(chalk.bgRedBright(`le planing n'a as pu etre supprimé`));
+        }
     }
 };
 

@@ -12,6 +12,9 @@ router.get('/dashboard/schedule/newschedule', auth.isLogged, scheduleController.
 // POST ADD schedule
 router.post('/dashboard/schedule', auth.isLogged, scheduleController.makeSchedule)
 
+// DELETE Favorite
+router.delete('/dashboard/schedule/:id', auth.isLogged, scheduleController.deleteSchedule)
+
 
 
 
