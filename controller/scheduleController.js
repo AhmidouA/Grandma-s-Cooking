@@ -4,7 +4,10 @@ const chalk = require("chalk");
 
 
 const scheduleController = {
-
+    //module schedule Page
+    schedulePage (req, res) {
+        res.render('schedule')
+    }
 }
 
 module.exports = scheduleController
