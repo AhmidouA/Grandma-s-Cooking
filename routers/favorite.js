@@ -6,9 +6,11 @@ const router = express.Router()
 // GET Favorite Page 
 router.get('/dashboard/favorites', auth.isLogged, favoriteController.favoritePage)
 
-
 // GET ADD Favorite
-router.get('/dashboard/favorites/newfavourite', auth.isLogged, favoriteController.AddFavoritePage)
+router.get('/dashboard/favorites/newfavorite', auth.isLogged, favoriteController.AddFavoritePage)
+
+// POST ADD Favorite
+router.post('/dashboard/favorites', auth.isLogged, favoriteController.makeFavorite)
 
 
 
