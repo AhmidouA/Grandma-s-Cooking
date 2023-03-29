@@ -54,7 +54,7 @@ const receipeController = {
 
   // module recette par id
   async receipeById (req, res) {
-    const userId = req.user.id
+    const userId = req.user.id;
     console.log(chalk.blue("{ userId }>>>>>>", userId));
     const receipeUserId = req.params.id
     console.log(chalk.cyan("{ receipeUserId }>>>>>>", receipeUserId));
@@ -75,8 +75,24 @@ const receipeController = {
 
 
   //module delete par id
-  deleteReceipe (req, res) {
-    
+  async deleteReceipe (req, res) {
+    const userId = req.user.id;
+    console.log(chalk.blue("{ userId }>>>>>>", userId));
+    const receipeId = req.params.id;
+    console.log(chalk.cyan("{ receipeId }>>>>>>", receipeId));
+
+    try {
+      const deleteReceipe = await Receipe.deleteOne({_id: receipeId, user: userId})
+      console.log(chalk.green("{ deleteReceipe }>>>>>>", deleteReceipe));
+
+      req.flash("success", "La recette a bien été supprimée")
+      res.redirect("/dashboard/myreceipes/" + receipeId);
+
+
+    } catch (err) {
+      console.error(chalk.bgRedBright(err));
+      console.error(chalk.bgRedBright(`la recette n'a pas pu etre supprimée `));
+    }
   }
 };
 
