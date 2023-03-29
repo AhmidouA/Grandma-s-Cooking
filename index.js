@@ -1,3 +1,7 @@
+/********************************/
+/**** Configuration express  ****/
+/********************************/
+
 const express = require("express");
 const app = express();
 
@@ -76,6 +80,32 @@ const methodOverride = require("method-override");
 app.use(methodOverride('_method'))
 
 app.use(userRouter, receipeRouter, ingredientRouter, favoriteRouter, scheduleRouter);
+
+/****************************/
+/**** Swagger generator  ****/
+/****************************/
+const expressJSDocSwagger = require('express-jsdoc-swagger');
+const options = {
+  info: {
+      version: '1.0.0',
+      title: 'Grandma\'s Cooking',
+      description : 'The Api endpoint of Cooking',
+      license: {
+          name: 'Cooking Project',
+      },
+  },
+  security: {
+      bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+      },
+  },
+  baseDir: __dirname,
+  // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
+  filesPattern: './**/*.js',
+};
+
+expressJSDocSwagger(app)(options);
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
