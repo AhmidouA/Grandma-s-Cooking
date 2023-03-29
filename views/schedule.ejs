@@ -4,22 +4,22 @@
     <h2 style="margin-top:40px;color:black;font-family:itallic">Schedule:</h2>
     <a href="/dashboard/schedule/newschedule"><button type="button" class="btn btn-success">New Schedule</button></a>
 
-  
+    <% for (const elementSchedule of schedule ) { %>
     <div class="infos-schedule" style="margin-top:30px">
-        <h3></h3>
-        <p>Time: </p>
-        <p>Date: </p>
+        <h3><%= elementSchedule.receipeName %></h3>
+        <p>Time: <%= elementSchedule.time %></p>
+        <p>Date: <%= elementSchedule.scheduleDate %></p>
         <div class="item">
             <div class="delete-schedule">
-                <form action="/dashboard/schedule/?_method=DELETE" method="POST">
+                <form action="/dashboard/schedule/<%= elementSchedule._id %>?_method=DELETE" method="POST">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger" value="delete">Delete</button>
                 </form>
             </div>
             <div class="content">
-                <span>Added on :  </span>
+                <span>Added on :  <%= elementSchedule.date %></span>
             </div>
         </div>
     </div>
-
+    <% } %>
 </div>

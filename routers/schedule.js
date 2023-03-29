@@ -4,7 +4,7 @@ const {auth} = require('../service')
 const router = express.Router()
 
 // GET Favorite Page 
-router.get('/dashboard/shedule', auth.isLogged, scheduleController.schedulePage)
+router.get('/dashboard/schedule', auth.isLogged, scheduleController.schedulePage)
 
 
 
