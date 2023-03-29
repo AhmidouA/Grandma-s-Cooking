@@ -5,8 +5,20 @@ const { Favorite } = require('../models')
 
 
 const favoriteController = {
-    favoritePage (req, res) {
-    }
+    async favoritePage (req, res) {
+        const userId = req.user.id;
+        console.log(chalk.blue("{ userId }>>>>>>", userId));
+
+        try {
+            const favorite = await Favorite.find({user: userId});
+            console.log(chalk.green("{ favorite }>>>>>>", favorite));
+            res.render('favorites', {favorite: favorite});
+
+        } catch (err) {
+            console.error(chalk.bgRedBright(err));
+            console.error(chalk.bgRedBright(`les favoris n'ont pas pu etre récupéré`));
+          }
+        }
 
 };
 

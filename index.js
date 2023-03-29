@@ -16,7 +16,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 // router
-const { userRouter, receipeRouter, ingredientRouter } = require("./routers");
+const { userRouter, receipeRouter, ingredientRouter, favoriteRouter } = require("./routers");
 // Models User
 const User = require("./models/user");
 
@@ -75,7 +75,7 @@ const methodOverride = require("method-override");
 // override with POST having ?_method=DELETE => pour les methode
 app.use(methodOverride('_method'))
 
-app.use(userRouter, receipeRouter, ingredientRouter);
+app.use(userRouter, receipeRouter, ingredientRouter, favoriteRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
