@@ -4,6 +4,7 @@
 
 const express = require("express");
 const app = express();
+const path = require('path');
 
 // module dotenv
 require("dotenv").config();
@@ -54,10 +55,15 @@ passport.serializeUser(User.serializeUser());
 // détruit a les info (cookies,...)
 passport.deserializeUser(User.deserializeUser());
 
+
+// middleware favicon
+const favicon = require('serve-favicon');
 // PORT
 const PORT = process.env.PORT ?? 3000;
 // Public
 app.use(express.static("public"));
+// Définir le chemin d'accès l'image favicon.ico
+app.use(favicon(path.join("./public/images/favicon.ico")));
 //EJS
 app.set("view engine", "ejs");
 
@@ -109,6 +115,7 @@ const options = {
 };
 
 expressJSDocSwagger(app)(options);
+
 
 // middleware 500
 app.use(auth.notFound);

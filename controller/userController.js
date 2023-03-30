@@ -50,7 +50,7 @@ const userController = {
 
   //module login Page
   indexLoginPage(req, res) {
-    res.render("Login");
+    res.render("login");
   },
 
   //module login(form)
