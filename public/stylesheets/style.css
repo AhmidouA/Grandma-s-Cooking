@@ -122,4 +122,14 @@ h1 a:hover {
 
 
 
+button.glide__arrow {
+    background-color: #fff; /* couleur de fond */
+    color: #333; /* couleur de texte */
+    border: 2px solid #333; /* bordure */
+    border-radius: 50%; /* arrondi de la bordure */
+    padding: 10px; /* espace intérieur du bouton */
+    font-size: 1.5rem; /* taille de la police */
+  }
+
+
 
