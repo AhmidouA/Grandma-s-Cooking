@@ -11,7 +11,7 @@
                 <div class="card" style="width: 15rem;">
                     <img class="card-img-top" src="<%= elementFavorite.image %>" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">"<%= elementFavorite.title %>" </h5>
+                        <h5 class="card-title">"<%= elementFavorite.title %>"</h5>
                         <p class="card-text">"<%= elementFavorite.description %>" </p>
                         <a href="#" class="btn btn-primary">"<%= elementFavorite.date %>" </a>
                         <form action="/dashboard/favorites/<%= elementFavorite._id %>?_method=DELETE" method="POST">

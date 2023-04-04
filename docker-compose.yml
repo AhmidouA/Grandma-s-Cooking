@@ -1,3 +1,5 @@
+# Projet cooking en mode volume bind mounts
+
 version: '3.9'
 
 services:
@@ -16,11 +18,13 @@ services:
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
       SECRET: ${SECRET}
     volumes:
-      - "volumeGrandma:/user/app/app"
+      - type: bind
+        source: /chemin/local/du/dossier
+        target: /chemin/du/dossier/dans/le/container
 volumes:
-  volumeGrandma:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: "<You're absolu path>"
+  cookingApp:
+
+
+## docker-compose pour lancer le projet
+## Le Projet est bien en mode bind mounting (bind mount) 
+## Juste le lancer et chaque modification on restart le container
