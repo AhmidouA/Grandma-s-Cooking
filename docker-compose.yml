@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: ${PORT}
+      MGUSER: ${MGUSER}
+      MGDBURL: ${MGDBURL}
+      MGDATABASE: ${MGDATABASE}
+      MGPASSWORD: ${MGPASSWORD}
+      MGHOST: ${MGHOST}
+      EMAIL_USERNAME: ${EMAIL_USERNAME}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      SECRET: ${SECRET}
+    volumes:
+      - "volumeGrandma:/user/app/app"
+volumes:
+  volumeGrandma:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "<You're absolu path>"
